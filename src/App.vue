@@ -42,7 +42,14 @@ export default {
     },
     methods: {
         deleteTodo: function(id) {
-            this.todos = this.todos.filter(todo => todo.id !== id);
+            axios
+                .delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
+                .then(
+                    response =>
+                        (this.todos = this.todos.filter(todo => todo.id !== id))
+                )
+                .catch(error => console.log(error));
+            // this.todos = this.todos.filter(todo => todo.id !== id);
         },
         addTodo: function(newTodo) {
             const { title, completed } = newTodo;
